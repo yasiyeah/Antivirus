@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Virus Alert</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            padding-top: 100px;
+        }
+        h1 {
+            font-size: 2em;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .box {
+            border: 2px solid #00ff00;
+            display: inline-block;
+            padding: 30px;
+            margin-top: 20px;
+            animation: glow 1.5s infinite alternate;
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 10px #00ff00; }
+            to { box-shadow: 0 0 30px #00ff00; }
+        }
+    </style>
+    <script>
+        function startPrank() {
+            setTimeout(() => alert(" Virus Detected! Initializing..."), 1000);
+            setTimeout(() => alert("Encrypting cookies ..."), 3000);
+            setTimeout(() => alert("Uploading your data in yaseen account ..."), 5000);
+            setTimeout(() => { document.getElementById("msg").innerText = "Just kidding! You've been pranked! 😂";
+            }, 7000);
+        }
+    </script>
+</head>
+<body onload="startPrank()">
+    <div class="box">
+        <h1 id="msg">Scanning System...</h1>
+    </div>
+</body>
+</html>
