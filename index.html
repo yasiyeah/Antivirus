@@ -1,50 +1,203 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Virus Alert</title>
+    <meta charset="UTF-8">
+    <title>System Breach Detected</title>
     <style>
         body {
-            background-color: #0a0a0a;
+            background-color: #000;
             color: #00ff00;
             font-family: 'Courier New', monospace;
-            text-align: center;
-            padding-top: 100px;
+            padding: 20px;
+            overflow: hidden;
         }
+
         h1 {
-            font-size: 2em;
-            animation: blink 1s infinite;
+            text-align: center;
         }
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
+
+        .terminal {
+            border: 2px solid #00ff00;
+            padding: 20px;
+            height: 500px;
+            overflow-y: scroll;
+            background-color: #000;
+            box-shadow: 0 0 20px #00ff00;
+            animation: flicker 0.2s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.95; }
             100% { opacity: 1; }
         }
-        .box {
-            border: 2px solid #00ff00;
-            display: inline-block;
-            padding: 30px;
-            margin-top: 20px;
-            animation: glow 1.5s infinite alternate;
+
+        .slider-container {
+            overflow: hidden;
+            white-space: nowrap;
+            margin-top: 30px;
+            border-top: 2px solid #00ff00;
+            border-bottom: 2px solid #00ff00;
+            padding: 10px 0;
         }
-        @keyframes glow {
-            from { box-shadow: 0 0 10px #00ff00; }
-            to { box-shadow: 0 0 30px #00ff00; }
+
+        .slider-track {
+            display: inline-block;
+            animation: slide 20s linear infinite;
+        }
+
+        .virus-image {
+            width: 180px;
+            height: auto;
+            margin: 0 15px;
+            border: 1px solid #00ff00;
+            box-shadow: 0 0 15px #00ff00;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Popup Modal */
+        #popupModal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        #popupContent {
+            background: black;
+            border: 2px solid #00ff00;
+            padding: 30px;
+            box-shadow: 0 0 15px #00ff00;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            font-size: 20px;
+            animation: flicker 0.3s infinite alternate;
+        }
+
+        video#userCam {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 200px;
+            border: 2px solid #00ff00;
+            display: none; /* Hidden by default */
         }
     </style>
-    <script>
-        function startPrank() {
-            setTimeout(() => alert(" Virus Detected! Initializing..."), 1000);
-            setTimeout(() => alert("cookies Blocking ..."), 3000);
-            setTimeout(() => alert("Uploading your data in yaseen account ..."), 5000);
-            setTimeout(() => { document.getElementById("msg").innerText = "Just kidding! You've been pranked! 😂";
-            }, 7000);
-        }
-    </script>
 </head>
-<body onload="startPrank()">
-    <div class="box">
-        <h1 id="msg">Scanning System...</h1>
+<body>
+    <h1>⚠️ SYSTEM BREACH DETECTED ⚠️</h1>
+
+    <div class="terminal" id="terminalOutput">
+        Initializing virus engine...
     </div>
+
+    <div class="slider-container">
+        <div class="slider-track">
+            <img class="virus-image" src="1.png" alt="Hacked Usernames">
+            <img class="virus-image" src="2.png" alt="Camera Access">
+            <img class="virus-image" src="3.png" alt="Processing Data">
+            <img class="virus-image" src="4.png" alt="Virus Active">
+            <!-- Repeat to make seamless -->
+            <img class="virus-image" src="1.png" alt="Hacked Usernames">
+            <img class="virus-image" src="2.png" alt="Camera Access">
+            <img class="virus-image" src="3.png" alt="Processing Data">
+            <img class="virus-image" src="4.png" alt="Virus Active">
+        </div>
+    </div>
+
+    <!-- Popup Modal -->
+    <div id="popupModal">
+        <div id="popupContent">
+            <p id="popupText">This is a popup message</p>
+        </div>
+    </div>
+
+    <!-- Hidden Video for Camera Feed -->
+    <video id="userCam" autoplay muted></video>
+
+    <script>
+        const terminal = document.getElementById("terminalOutput");
+        const logs = [
+            "[OK] Accessing kernel.sys...",
+            "[OK] Bypassing firewall protocol...",
+            "[OK] Injecting malicious script into memory...",
+            "[OK] Scanning personal files...",
+            "[OK] Found: 42,391 files",
+            "[WARNING] Uploading files to remote server...",
+            "[INFO] Connected to: nasa.deepgrid.sec",
+            "[OK] Starting webcam stream...",
+            "[ERROR] Access camera: success",
+            "[OK] Harvesting browser history...",
+            "[OK] Collecting credentials: Chrome, Firefox, Edge...",
+            "[OK] Process complete.",
+            "[SYSTEM] Encrypting drive C://",
+            "[SYSTEM] Sending payload to target...",
+            "[COMPLETE] System fully compromised."
+        ];
+
+        function startHack() {
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i >= logs.length) {
+                    clearInterval(interval);
+                    return;
+                }
+                const line = document.createElement("div");
+                line.textContent = logs[i];
+                terminal.appendChild(line);
+                terminal.scrollTop = terminal.scrollHeight;
+                i++;
+            }, 800);
+        }
+
+        const popup = document.getElementById("popupModal");
+        const popupText = document.getElementById("popupText");
+
+        function showPopup(message, delay) {
+            setTimeout(() => {
+                popupText.textContent = message;
+                popup.style.display = "flex";
+                setTimeout(() => {
+                    popup.style.display = "none";
+                }, 3000);
+            }, delay);
+        }
+
+        async function requestCameraAndMic() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                const video = document.getElementById("userCam");
+                video.srcObject = stream;
+                video.style.display = "block"; // Show video feed (optional)
+                console.log("✅ Access granted to camera and microphone.");
+            } catch (err) {
+                console.warn("❌ Camera/Microphone access denied or blocked.", err);
+            }
+        }
+
+        window.onload = function () {
+            startHack();
+            requestCameraAndMic();
+            showPopup("⚠️ Unauthorized Access Detected ⚠️", 2000);
+            showPopup("Attempting to trace location...", 6000);
+            showPopup("❌ TRACE FAILED. SYSTEM BREACHED ❌", 10000);
+        };
+    </script>
 </body>
 </html>
